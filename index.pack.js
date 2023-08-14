@@ -509,7 +509,12 @@ function App() {
         _react2.default.createElement(
             "p",
             { className: "instructions" },
-            "Roll until all dice are the same. Click each die to freeze it at its current value between rolls."
+            "Roll until all dice are the same."
+        ),
+        _react2.default.createElement(
+            "p",
+            { className: "instructions" },
+            "Click each die to freeze it at its current value between rolls."
         ),
         _react2.default.createElement(
             "div",
