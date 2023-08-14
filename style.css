@@ -4,9 +4,11 @@
 
 body {
     margin: 0;
-    background-color: #0B2434;
+    background-color: #03111a;
     padding: 20px;
     font-family: 'Karla', sans-serif;
+    display: flex;
+    justify-content: center;
 }
 
 main {
@@ -49,10 +51,6 @@ main {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-}
-
-.die-num {
-    font-size: 2rem;
 }
 
 .roll-dice {

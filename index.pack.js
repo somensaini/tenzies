@@ -427,6 +427,11 @@ function App() {
         tenzies = _React$useState4[0],
         setTenzies = _React$useState4[1];
 
+    var _React$useState5 = _react2.default.useState(0),
+        _React$useState6 = _slicedToArray(_React$useState5, 2),
+        rollCount = _React$useState6[0],
+        setRollCount = _React$useState6[1];
+
     _react2.default.useEffect(function () {
         var allHeld = dice.every(function (die) {
             return die.isHeld;
@@ -463,9 +468,13 @@ function App() {
                     return die.isHeld ? die : generateNewDie();
                 });
             });
+            setRollCount(function (oldRollCount) {
+                return oldRollCount + 1;
+            });
         } else {
             setTenzies(false);
             setDice(allNewDice());
+            setRollCount(0);
         }
     }
 
@@ -506,6 +515,12 @@ function App() {
             "div",
             { className: "dice-container" },
             diceElements
+        ),
+        _react2.default.createElement(
+            "p",
+            null,
+            "Roll Count: ",
+            rollCount
         ),
         _react2.default.createElement(
             "button",
@@ -591,13 +606,8 @@ function Die(props) {
         {
             className: "die-face",
             style: styles,
-            onClick: props.holdDice
-        },
-        _react2.default.createElement(
-            "h2",
-            { className: "die-num" },
-            props.value
-        )
+            onClick: props.holdDice },
+        _react2.default.createElement("img", { "class": "die-face", src: "./images/die_" + props.value + ".png" })
     );
 }
 

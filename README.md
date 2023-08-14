@@ -11,7 +11,7 @@ This project was created for the purpose of developing my React knowledge and sk
 
 ## Optimizations / Improvements
 
-CSS: Add real dots on the dice instead of plain numbers.
+Add dice faces on the dice instead of plain numbers.
 
 Track the number of rolls.
 
