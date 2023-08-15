@@ -11,6 +11,8 @@ export default function App() {
     const [rollCount, setRollCount] = React.useState(0)
     const [time, setTime] = React.useState(0)
     const [running, setRunning] = React.useState(false)
+    const storedBestTime = JSON.parse(localStorage.getItem('bestTime'))
+    const [bestTime, setBestTime] = React.useState(storedBestTime)
     
     React.useEffect(() => {
         const allHeld = dice.every(die => die.isHeld)
@@ -19,8 +21,13 @@ export default function App() {
         if (allHeld && allSameValue) {
             setTenzies(true)
             setRunning(false)
+            checkBestTime()            
         }
-    }, [dice])
+    }, [dice, localStorage])
+
+    React.useEffect(() => {
+        localStorage.setItem('bestTime', JSON.stringify(bestTime))
+    }, [bestTime])
 
     function generateNewDie() {
         return {
@@ -51,6 +58,7 @@ export default function App() {
             setTenzies(false)
             setDice(allNewDice())
             setRollCount(0)
+            checkBestTime()
             setTime(0)
         }
     }
@@ -63,6 +71,12 @@ export default function App() {
         }))
     }
     
+    function checkBestTime(){
+        if (bestTime === null || bestTime === '' || storedBestTime > time){
+            setBestTime(time)
+        }
+    }
+
     const diceElements = dice.map(die => (
         <Die 
             key={die.id} 
@@ -88,11 +102,15 @@ export default function App() {
             <div className="dice-container">
                 {diceElements}
             </div>
-            <div>
-                <p className="roll-counter">Roll Count: {rollCount}</p>
-                <p className="timer">Timer:
+            <div className="stats">
+                <p>Roll Count: {rollCount}</p>
+                <p>Time:
                     <span> {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
                     <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
+                </p>
+                <p>Best Time:
+                    <span> {bestTime ? ("0" + Math.floor((bestTime / 60000) % 60)).slice(-2) : "00"}:</span>
+                    <span>{bestTime ? ("0" + Math.floor((bestTime / 1000) % 60)).slice(-2) : "00"}</span>
                 </p>
             </div>            
             <button 

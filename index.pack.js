@@ -1833,6 +1833,13 @@ function App() {
         running = _React$useState10[0],
         setRunning = _React$useState10[1];
 
+    var storedBestTime = JSON.parse(localStorage.getItem('bestTime'));
+
+    var _React$useState11 = _react2.default.useState(storedBestTime),
+        _React$useState12 = _slicedToArray(_React$useState11, 2),
+        bestTime = _React$useState12[0],
+        setBestTime = _React$useState12[1];
+
     _react2.default.useEffect(function () {
         var allHeld = dice.every(function (die) {
             return die.isHeld;
@@ -1844,8 +1851,13 @@ function App() {
         if (allHeld && allSameValue) {
             setTenzies(true);
             setRunning(false);
+            checkBestTime();
         }
-    }, [dice]);
+    }, [dice, localStorage]);
+
+    _react2.default.useEffect(function () {
+        localStorage.setItem('bestTime', JSON.stringify(bestTime));
+    }, [bestTime]);
 
     function generateNewDie() {
         return {
@@ -1878,6 +1890,7 @@ function App() {
             setTenzies(false);
             setDice(allNewDice());
             setRollCount(0);
+            checkBestTime();
             setTime(0);
         }
     }
@@ -1888,6 +1901,12 @@ function App() {
                 return die.id === id ? _extends({}, die, { isHeld: !die.isHeld }) : die;
             });
         });
+    }
+
+    function checkBestTime() {
+        if (bestTime === null || bestTime === '' || storedBestTime > time) {
+            setBestTime(time);
+        }
     }
 
     var diceElements = dice.map(function (die) {
@@ -1933,17 +1952,17 @@ function App() {
         ),
         _react2.default.createElement(
             "div",
-            null,
+            { className: "stats" },
             _react2.default.createElement(
                 "p",
-                { className: "roll-counter" },
+                null,
                 "Roll Count: ",
                 rollCount
             ),
             _react2.default.createElement(
                 "p",
-                { className: "timer" },
-                "Timer:",
+                null,
+                "Time:",
                 _react2.default.createElement(
                     "span",
                     null,
@@ -1955,6 +1974,23 @@ function App() {
                     "span",
                     null,
                     ("0" + Math.floor(time / 1000 % 60)).slice(-2)
+                )
+            ),
+            _react2.default.createElement(
+                "p",
+                null,
+                "Best Time:",
+                _react2.default.createElement(
+                    "span",
+                    null,
+                    " ",
+                    bestTime ? ("0" + Math.floor(bestTime / 60000 % 60)).slice(-2) : "00",
+                    ":"
+                ),
+                _react2.default.createElement(
+                    "span",
+                    null,
+                    bestTime ? ("0" + Math.floor(bestTime / 1000 % 60)).slice(-2) : "00"
                 )
             )
         ),
