@@ -2,12 +2,15 @@ import React from "react"
 import Die from "./Die"
 import {nanoid} from "nanoid"
 import Confetti from "react-confetti"
+import { useInterval } from 'usehooks-ts'
 
 export default function App() {
 
     const [dice, setDice] = React.useState(allNewDice())
     const [tenzies, setTenzies] = React.useState(false)
     const [rollCount, setRollCount] = React.useState(0)
+    const [time, setTime] = React.useState(0)
+    const [running, setRunning] = React.useState(false)
     
     React.useEffect(() => {
         const allHeld = dice.every(die => die.isHeld)
@@ -15,6 +18,7 @@ export default function App() {
         const allSameValue = dice.every(die => die.value === firstValue)
         if (allHeld && allSameValue) {
             setTenzies(true)
+            setRunning(false)
         }
     }, [dice])
 
@@ -36,6 +40,7 @@ export default function App() {
     
     function rollDice() {
         if(!tenzies) {
+            setRunning(true)
             setDice(oldDice => oldDice.map(die => {
                 return die.isHeld ? 
                     die :
@@ -46,6 +51,7 @@ export default function App() {
             setTenzies(false)
             setDice(allNewDice())
             setRollCount(0)
+            setTime(0)
         }
     }
     
@@ -66,6 +72,13 @@ export default function App() {
         />
     ))
     
+    useInterval(
+        () => {
+          setTime(prevTime => prevTime + 10)
+        },
+        running ? 10 : null,
+      )
+
     return (
         <main>
             {tenzies && <Confetti />}
@@ -75,7 +88,13 @@ export default function App() {
             <div className="dice-container">
                 {diceElements}
             </div>
-            <p>Roll Count: {rollCount}</p>
+            <div>
+                <p className="roll-counter">Roll Count: {rollCount}</p>
+                <p className="timer">Timer:
+                    <span> {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
+                    <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
+                </p>
+            </div>            
             <button 
                 className="roll-dice" 
                 onClick={rollDice}
