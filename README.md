@@ -9,15 +9,15 @@ This project is a clone of the game Tenzies with additional improvements and cus
 
 This project was created for the purpose of developing my React knowledge and skills. 
 
-## Optimizations / Improvements
+## Optimizations / Improvements:
 
-Add dice faces on the dice instead of plain numbers.
+~~Add dice faces on the dice instead of plain numbers.~~
 
-Track the number of rolls.
+~~Track the number of rolls.~~
 
-Track the time it took to win.
+~~Track the time it took to win.~~
 
-Save the best time locally.
+~~Save the best time locally.~~
 
 ## Lessons Learned:
 
