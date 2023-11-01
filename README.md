@@ -1,13 +1,14 @@
 # tenzies
-This project is a clone of the game Tenzies with additional improvements and customized styling.
+Play it here! 
+https://tenzies.cyclic.app/
 
 ![image](https://github.com/somensaini/tenzies/assets/40222610/6421c18e-df20-42ca-9c5d-6dbdc8e6ea21)
 
-## How It's Made:
+## Description:
 
-**Tech used:** HTML, CSS, JavaScript, React
+Tenzies is a dice game developed using a seamless blend of HTML, CSS, JavaScript, and React. This digital rendition of the classic game requires you to match all the dice to one number. When a die is clicked, it will be 'held' in place. Clicking 'Roll' will re-roll the non-held dice. Once all 10 dice are held and have the matching number, you win!
 
-This project was created for the purpose of developing my React knowledge and skills. 
+**Tech Used**: HTML, CSS, JavaScript, React.
 
 ## Optimizations / Improvements:
 
@@ -21,11 +22,4 @@ This project was created for the purpose of developing my React knowledge and sk
 
 ## Lessons Learned:
 
-This was my first project after learning the basics of React. I learned how to effectively create components and use the State and Effect hooks in React. Creating this project has taught me the importance of React in modern web applications and has improved my ability to notice these components on modern sites and applications.
-
-## Quick Start:
-
-```
-$ yarn # npm install
-$ yarn build # npm run build
-````
+This is a React application used to further develop my React skills. I learned how to effectively create components and use the State and Effect hooks in React. Creating this application has taught me the importance of React in modern web applications and has improved my ability to notice these components on modern sites and applications.
